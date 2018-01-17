@@ -8,9 +8,11 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class SpringReactApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(SpringReactApplication.class, args);
 
+		SpringApplication.run(SpringReactApplication.class, args);
 		ReactClient reactClient = new ReactClient();
-		System.out.println("The result is " + reactClient.getOrders());
+		reactClient.createOrder();
+		reactClient.printAllOrders();
+		//reactClient.getOrder("1");
 	}
 }

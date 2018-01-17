@@ -14,9 +14,9 @@ public class OrderRouter {
 
     @Bean
     public RouterFunction<ServerResponse> route(OrderHandler orderHandler) {
-        System.out.println("Inside the OrderRouter.RouterFunction");
-        // ToDo : add multiple Routers
         return RouterFunctions
-                .route(RequestPredicates.GET("/order").and(RequestPredicates.accept(MediaType.TEXT_PLAIN)), orderHandler::listOrders);
+                .route(RequestPredicates.GET("/order").and(RequestPredicates.accept(MediaType.TEXT_PLAIN)), orderHandler::listOrders)
+                .andRoute(RequestPredicates.POST("/order").and(RequestPredicates.accept(MediaType.TEXT_PLAIN)), orderHandler::createOrder)
+                .andRoute(RequestPredicates.GET("/order/{orderId}").and(RequestPredicates.accept(MediaType.TEXT_PLAIN)), orderHandler::getOrder);
     }
 }
