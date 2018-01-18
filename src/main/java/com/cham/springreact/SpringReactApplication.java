@@ -10,6 +10,7 @@ public class SpringReactApplication {
 	public static void main(String[] args) {
 
 		SpringApplication.run(SpringReactApplication.class, args);
+
 		ReactClient reactClient = new ReactClient();
 		reactClient.createOrder();
 		reactClient.printAllOrders();
