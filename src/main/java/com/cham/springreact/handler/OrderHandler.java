@@ -12,18 +12,25 @@ import reactor.core.publisher.Mono;
 import static org.springframework.http.MediaType.APPLICATION_JSON;
 import static org.springframework.web.reactive.function.BodyInserters.fromObject;
 
+/**
+ * Created by Chaminda Wijayasundara on 13 Jan 2018
+ */
+
 @Component
 public class OrderHandler {
 
     @Autowired
     private final OrderRepo repository;
 
+    // constructor
     public OrderHandler(OrderRepo orderRepo) {
         this.repository = orderRepo;
     }
 
     public Mono<ServerResponse> getOrder(ServerRequest request) {
+
         String orderId = request.pathVariable("orderId");
+
         Mono<ServerResponse> notFound = ServerResponse.notFound().build();
         Mono<Order> orderMono = this.repository.getOrder(orderId);
         return orderMono
@@ -34,11 +41,13 @@ public class OrderHandler {
     }
 
     public Mono<ServerResponse> createOrder(ServerRequest request) {
+        System.out.println("Inside OrderHandler.createOrder");
         Mono<Order> order = request.bodyToMono(Order.class);
         return ServerResponse.ok().build(this.repository.saveOrder(order));
     }
 
     public Mono<ServerResponse> listOrders(ServerRequest request) {
+        System.out.println("Inside OrderHandler.listOrders");
         Flux<Order> orders = this.repository.getAllOrders();
         return ServerResponse.ok().contentType(APPLICATION_JSON).body(orders, Order.class);
     }

@@ -14,12 +14,23 @@ import reactor.core.publisher.Mono;
 import java.net.URI;
 import java.util.List;
 
+
+/**
+ * Created by Chaminda Wijayasundara on 13 Jan 2018
+ */
+
 public class ReactClient{
 
     private ExchangeFunction exchange = ExchangeFunctions.create(new ReactorClientHttpConnector());
 
+    private final String setUpStr= "http://%s:%d/order";
+
+    private final String hostStr="localhost";
+
+    private final int port= 8080;
+
     public void printAllOrders() {
-        URI uri = URI.create(String.format("http://%s:%d/order", "localhost", 8080));
+        URI uri = URI.create(String.format(setUpStr, hostStr, port));
         ClientRequest request = ClientRequest.method(HttpMethod.GET, uri).build();
 
         Flux<Order> orderFlux = exchange.exchange(request)
@@ -30,7 +41,7 @@ public class ReactClient{
     }
 
     public void createOrder() {
-        URI uri = URI.create(String.format("http://%s:%d/order", "localhost", 8080));
+        URI uri = URI.create(String.format(setUpStr, hostStr, port));
         Order jose_doe = new Order("3", "Jose Doe", "23 Mountain road Calif");
 
         ClientRequest request = ClientRequest.method(HttpMethod.POST, uri)
@@ -41,7 +52,7 @@ public class ReactClient{
     }
 
     public void getOrder(String id) {
-        URI uri = URI.create(String.format("http://%s:%d/order/{id}", "localhost", 8080));
+        URI uri = URI.create(String.format("http://%s:%d/order/1", hostStr, port));
         ClientRequest request = ClientRequest.method(HttpMethod.GET, uri).build();
 
         Flux<Order> orderFlux = exchange.exchange(request)

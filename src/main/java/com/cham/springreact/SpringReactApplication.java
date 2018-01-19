@@ -4,6 +4,10 @@ import com.cham.springreact.client.ReactClient;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+/**
+ * Created by Chaminda Wijayasundara on 13 Jan 2018
+ */
+
 @SpringBootApplication
 public class SpringReactApplication {
 
@@ -14,6 +18,6 @@ public class SpringReactApplication {
 		ReactClient reactClient = new ReactClient();
 		reactClient.createOrder();
 		reactClient.printAllOrders();
-		//reactClient.getOrder("1");
+		reactClient.getOrder("1");
 	}
 }

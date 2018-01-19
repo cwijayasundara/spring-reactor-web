@@ -2,6 +2,10 @@ package com.cham.springreact.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+/**
+ * Created by Chaminda Wijayasundara on 13 Jan 2018
+ */
+
 public class Order {
 
     private String orderId;
